@@ -2,6 +2,7 @@ import { useState } from "react";
 import produce from "immer";
 import { useNavigate } from "react-router-dom";
 import { useUsersContext } from "../../Context/UserContext";
+import { validateEmail } from "../../Common/utils";
 
 import styles from "./signup.module.css";
 
@@ -36,8 +37,19 @@ export const SignUp = () => {
       <form
         onSubmit={(evt) => {
           evt.preventDefault();
-          updateAuthDetails?.(userInfo);
-          navigate("/login");
+          if (
+            validateEmail(userInfo.username) &&
+            userInfo.password?.length >= 8
+          ) {
+            updateAuthDetails?.(userInfo);
+            navigate("/login");
+          } else {
+            alert(
+              !validateEmail(userInfo.username)
+                ? "Invalid Email"
+                : "Password length should be greater than 7"
+            );
+          }
         }}
         className={styles.signupForm}
       >

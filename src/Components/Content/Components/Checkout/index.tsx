@@ -143,7 +143,7 @@ export default function Checkout(): JSX.Element {
               <div>
                 10%&nbsp;
                 {!isDiscountApplicable
-                  ? "Not Applicable"
+                  ? "(Not Applicable)"
                   : `(₹${Math.round(totalAmount * 0.1)})`}
               </div>
             </div>

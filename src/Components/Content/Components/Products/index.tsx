@@ -12,7 +12,6 @@ import {
   TNavigationTree,
   TProduct,
   TProductDetail,
-  TProductsKey,
 } from "./types";
 
 import { getNavigationTree, getProductsFromNavbar } from "../../../../services";
