@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Add [this](https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc) extension to your browser to bypass the CORS error.
+Add [this](https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc) extension to your browser to bypass the CORS error. After Installation, click on extension and toggle **Enable cors** 
 
 ## Overview
 
