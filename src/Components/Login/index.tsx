@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import produce from "immer";
 import { useNavigate } from "react-router-dom";
-import styles from "./login.module.css";
 import { useUsersContext } from "../../Context/UserContext";
+import styles from "./login.module.css";
 
 type TUserInfo = {
   username: string;
@@ -29,6 +29,7 @@ const Login = () => {
     );
   }
 
+  // check user is loggedIn
   const handleUserLogin = () => {
     if (
       userDetails?.auth?.hasOwnProperty(userInfo.username) &&
@@ -76,8 +77,8 @@ const Login = () => {
           Login
         </button>
       </form>
-      <div>
-        Don't have account?{" "}
+      <div className={styles.noAccount}>
+        Don't have account?&nbsp;
         <span onClick={() => navigate("/signup")}>Register Now</span>
       </div>
     </div>

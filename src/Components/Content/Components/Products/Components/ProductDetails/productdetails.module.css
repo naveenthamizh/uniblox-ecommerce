@@ -31,12 +31,14 @@
 .thumbnailImageContainer {
   width: 56px;
   height: 60px;
+  border-radius: var(--border-radius);
 }
 
 .image {
   width: 100%;
   height: 100%;
   object-fit: fill;
+  border-radius: var(--border-radius);
 }
 
 .selectedImageContainer {
@@ -169,6 +171,7 @@
   color: var(--text-color-primary);
   font-weight: var(--font-weight-500);
   border-radius: var(--space-12);
+  cursor: pointer;
 }
 
 .sizeContainer {
@@ -184,4 +187,13 @@
 
 .detailsContainer {
   color: var(--text-color-secondary);
+}
+
+.selectedOption {
+  border: 1px solid var(--primary-base);
+  border-radius: var(--border-radius);
+}
+
+.errored {
+  color: var(--danger-base);
 }

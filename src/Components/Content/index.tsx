@@ -1,13 +1,11 @@
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Products from "./Components/Products";
-import Cart from "./Components/Cart";
 import Checkout from "./Components/Checkout";
 import OrderSuccessPage from "./Components/OrderStatus";
-
+import { useUsersContext } from "../../Context/UserContext";
 import { ProductDetails } from "./Components/Products/Components/ProductDetails";
 import Login from "../Login";
 import { SignUp } from "../Signup";
-import { useUsersContext } from "../../Context/UserContext";
 
 import styles from "./content.module.css";
 

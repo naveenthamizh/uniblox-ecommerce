@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoCartOutline } from "react-icons/io5";
+import { BsFillStarFill } from "react-icons/bs";
 import { MdOutlineDoubleArrow } from "react-icons/md";
-
-import { getProducts, TProductsResponse } from "../../../../../../services";
 
 import {
   Button,
@@ -11,10 +10,11 @@ import {
   BUTTON_VARIANTS,
 } from "../../../../../../Common/Button";
 import { classNames } from "../../../../../../Common/utils";
-import { BsFillStarFill } from "react-icons/bs";
+import { useUsersContext } from "../../../../../../Context/UserContext";
+
+import { getProducts, TProductsResponse } from "../../../../../../services";
 
 import styles from "./productdetails.module.css";
-import { useUsersContext } from "../../../../../../Context/UserContext";
 
 export const ProductDetails = (): JSX.Element => {
   const { id } = useParams();
@@ -28,12 +28,17 @@ export const ProductDetails = (): JSX.Element => {
   >(undefined);
 
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
-    useMemo(() => productDetails?.result?.product?.images[0], [productDetails])
+    productDetails?.result?.product?.images[0]
+  );
+
+  const [selectedSize, setSelectedSize] = useState<string | undefined>(
+    undefined
   );
 
   const productRating =
-    productDetails?.result?.product.catalog_reviews_summary.average_rating;
+    productDetails?.result?.product.catalog_reviews_summary?.average_rating;
 
+  // Fetch selected product details
   useEffect(() => {
     if (id)
       getProducts({ ad_active: true, include_catalog: true }, id).then(
@@ -42,8 +47,13 @@ export const ProductDetails = (): JSX.Element => {
           setSelectedImage(response?.result?.product?.images[0]);
         }
       );
+    return () => {
+      setProductDetails(undefined);
+      setSelectedImage(undefined);
+    };
   }, [id]);
 
+  // Check product is already available in the cart
   const isAlreadyAvailableInCart = userDetails?.cartItems?.[
     userDetails.currentLoggedUser || ""
   ]?.some(
@@ -52,6 +62,7 @@ export const ProductDetails = (): JSX.Element => {
       productDetails?.result?.product?.catalog_id
   );
 
+  // Remove item from cart
   const handleDeleteItemFromCart = () => {
     const getFilteredProducts = userDetails?.cartItems?.[
       userDetails.currentLoggedUser || ""
@@ -74,7 +85,10 @@ export const ProductDetails = (): JSX.Element => {
           <div className={styles.thumbnailImage}>
             {productDetails?.result?.product?.images?.map((items) => (
               <div
-                className={styles.thumbnailImageContainer}
+                className={classNames({
+                  [styles.thumbnailImageContainer]: true,
+                  [styles.selectedOption]: selectedImage === items,
+                })}
                 onClick={() => setSelectedImage(items)}
               >
                 <img className={styles.image} alt={items} src={items} />
@@ -118,6 +132,7 @@ export const ProductDetails = (): JSX.Element => {
                     navigate("/checkout");
                   }
                 }}
+                disabled={!selectedSize}
               >
                 Buy now
               </Button>
@@ -193,11 +208,27 @@ export const ProductDetails = (): JSX.Element => {
             )}
           </div>
           <div className={styles.productNameInfo}>
-            <div className={styles.title}>Select Size</div>
+            <div className={styles.title}>
+              Select Size
+              {!selectedSize && (
+                <>
+                  &nbsp;-&nbsp;
+                  <span className={styles.errored}>Select product size</span>
+                </>
+              )}
+            </div>
             <div className={styles.sizeContainer}>
               {productDetails?.result?.product?.suppliers?.[0]?.variations?.map(
                 (items) => (
-                  <div className={styles.productSize}>{items}</div>
+                  <div
+                    onClick={() => setSelectedSize(items)}
+                    className={classNames({
+                      [styles.productSize]: true,
+                      [styles.selectedOption]: selectedSize === items,
+                    })}
+                  >
+                    {items}
+                  </div>
                 )
               )}
             </div>

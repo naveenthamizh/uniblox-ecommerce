@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { BsFillStarFill } from "react-icons/bs";
 
-import { getNavigationTree } from "../../../../services";
+import Popover from "../../../../Common/Components/Popover";
+import { classNames } from "../../../../Common/utils";
+import { PRODUCT_MOCKS } from "../../../../Mocks/Products";
+
 import {
   PopOver,
   TCategories,
@@ -12,10 +14,8 @@ import {
   TProductDetail,
   TProductsKey,
 } from "./types";
-import Popover from "../../../../Common/Components/Popover";
-import { classNames } from "../../../../Common/utils";
 
-import { PRODUCT_MOCKS } from "../../../../Mocks/Products";
+import { getNavigationTree, getProductsFromNavbar } from "../../../../services";
 
 import styles from "./products.module.css";
 
@@ -24,12 +24,13 @@ export default function Products(): JSX.Element {
 
   const [products, setProducts] = useState<TProduct>(PRODUCT_MOCKS["3tc"]);
 
+  // get navigation links
   useEffect(() => {
     getNavigationTree().then(setCategories);
   }, []);
 
-  const getProductDetails = useCallback((productId: TProductsKey) => {
-    setProducts(PRODUCT_MOCKS[productId]);
+  const getProductDetails = useCallback((productId: string) => {
+    getProductsFromNavbar(productId).then(setProducts);
   }, []);
 
   return (
@@ -87,6 +88,9 @@ const PopOverListRenderer = (props: PopOver): JSX.Element => {
                 className={styles.subCategoryTitle}
                 onClick={(event) => {
                   event.stopPropagation();
+                  props?.getProducts(
+                    availableCategories.level_3?.[0]?.page?.page_id || ""
+                  );
                 }}
               >
                 {categoriesSubList.title}
@@ -104,12 +108,15 @@ const ProductsCard = (props: TProductDetail): JSX.Element => {
 
   const navigate = useNavigate();
 
+  const { catalog_reviews_summary, supplier_reviews_summary } = product;
+
   const getProductId = product.consumer_share_text;
 
+  // get product link
   const link = getProductId.match(/https?:\/\/\S+/g)?.[0];
-  const productCode = link?.split?.("/p/")?.[1]?.split?.("?")?.[0];
 
-  const { catalog_reviews_summary, supplier_reviews_summary } = product;
+  // get productId from link
+  const productCode = link?.split?.("/p/")?.[1]?.split?.("?")?.[0];
 
   const productRating =
     catalog_reviews_summary?.average_rating ??

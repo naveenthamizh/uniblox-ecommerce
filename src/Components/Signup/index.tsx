@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import produce from "immer";
-import styles from "./signup.module.css"; // Import the CSS file for styling
 import { useNavigate } from "react-router-dom";
 import { useUsersContext } from "../../Context/UserContext";
+
+import styles from "./signup.module.css";
 
 type TUserInfo = {
   username: string;
@@ -65,8 +66,8 @@ export const SignUp = () => {
           Sign Up
         </button>
       </form>
-      <div>
-        Already account exist?{" "}
+      <div className={styles.accountExist}>
+        Already account exist?&nbsp;
         <span onClick={() => navigate("/login")}>Login</span>
       </div>
     </div>

@@ -14,7 +14,7 @@ export type TProductList = (typeof PRODUCT_MOCKS)[TProductsKey];
 export type TCategories = {
   list: TLevelOne;
   index: number;
-  getProducts: (payload: TProductsKey) => void;
+  getProducts: (payload: string) => void;
 };
 
 export type TLevelOne = {
@@ -48,7 +48,7 @@ export type TProductDetail = {
 
 export type PopOver = {
   level_2: TLevelTwo[];
-  getProducts: (payload: TProductsKey) => void;
+  getProducts: (payload: string) => void;
 };
 
 export type TIndividualProductDetails = {

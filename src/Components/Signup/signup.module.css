@@ -45,3 +45,15 @@
 .signupButton:hover {
   background-color: #45a049;
 }
+
+.accountExist {
+  padding: var(--space-8) 0;
+  color: var(--text-color-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-400);
+}
+
+.accountExist span {
+  color: var(--primary-base);
+  font-size: var(--font-size-14);
+}

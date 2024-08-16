@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 
+import { Button } from "../../../../Common/Button";
+import { classNames } from "../../../../Common/utils";
+
 import { useUsersContext } from "../../../../Context/UserContext";
 import { TProductsResponse } from "../../../../services";
 import styles from "./checkout.module.css";
-import { Button } from "../../../../Common/Button";
-import { classNames } from "../../../../Common/utils";
 
 const DISCOUNT_ON_EVERY_NTH_ORDER = 5;
 
@@ -14,11 +15,11 @@ export default function Checkout(): JSX.Element {
   const { userDetails, updateCartItems, updatePurchaseItems } =
     useUsersContext();
 
+  let totalAmount = 0;
+
   const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState<number>(1);
-
-  let totalAmount = 0;
 
   const getCartItems =
     userDetails.cartItems?.[userDetails?.currentLoggedUser || ""];
@@ -28,12 +29,15 @@ export default function Checkout(): JSX.Element {
   };
 
   const handleDeleteItemFromCart = (product: TProductsResponse) => {
+    // Filter item tobe deleted
     const getFilteredProducts = userDetails?.cartItems?.[
       userDetails.currentLoggedUser || ""
     ].filter(
       (item) =>
         item.result.product.catalog_id !== product.result.product.catalog_id
     );
+
+    // Update Cart with  filtered items
     updateCartItems?.({
       updateAll: true,
       allProducts: getFilteredProducts,
@@ -44,6 +48,7 @@ export default function Checkout(): JSX.Element {
     }
   };
 
+  // Check is Discount applicable
   const isDiscountApplicable =
     userDetails?.totalPurchases[userDetails?.currentLoggedUser || ""] > 0 &&
     (userDetails?.totalPurchases[userDetails?.currentLoggedUser || ""] + 1) %
@@ -136,7 +141,7 @@ export default function Checkout(): JSX.Element {
             >
               <div>Discount</div>
               <div>
-                10%{" "}
+                10%&nbsp;
                 {!isDiscountApplicable
                   ? "Not Applicable"
                   : `(₹${Math.round(totalAmount * 0.1)})`}

@@ -1,8 +1,6 @@
-import produce, { enableMapSet } from "immer";
+import produce from "immer";
 import React, { ReactNode, useState } from "react";
 import { TProductsResponse } from "../services";
-
-enableMapSet();
 
 type TUsersDetails = {
   currentLoggedUser?: string;

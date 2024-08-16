@@ -4,5 +4,4 @@
   display: grid;
   grid-template-rows: auto 1fr;
   overflow: auto;
-  padding: var(--space-4);
 }

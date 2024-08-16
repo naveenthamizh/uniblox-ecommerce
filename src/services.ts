@@ -1,6 +1,7 @@
 import { AxiosRequestConfig, default as Axios } from "axios";
 import {
   TNavigationTree,
+  TProduct,
   TProductList,
 } from "./Components/Content/Components/Products/types";
 
@@ -175,5 +176,18 @@ export const getProducts = async (
       `https://www.meesho.com/api/v1/product/${id}`,
       payload
     )
+    .then((response) => response);
+};
+
+export const getProductsFromNavbar = async (id: string): Promise<TProduct> => {
+  return await axios
+    .post<TProduct>("https://www.meesho.com/api/v1/products", {
+      page_id: id,
+      page: 1,
+      offset: 0,
+      limit: 20,
+      cursor: null,
+      isNewPlpFlowEnabled: true,
+    })
     .then((response) => response);
 };
