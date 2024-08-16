@@ -56,4 +56,5 @@
 .noAccount span {
   color: var(--primary-base);
   font-size: var(--font-size-14);
+  cursor: pointer;
 }
