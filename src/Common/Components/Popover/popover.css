@@ -1,0 +1,27 @@
+.popoverBox {
+  max-height: 400px;
+  overflow-y: auto;
+  max-width: 100%;
+}
+
+.popoverBox ::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.popoverBox::-webkit-scrollbar {
+  width: 3px;
+}
+
+.popoverBox::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.popoverBox:hover::-webkit-scrollbar-thumb {
+  display: block;
+  background-color: var(--gray-5);
+  border-radius: 5px;
+}
+
+.popoverBox::-webkit-scrollbar-track {
+  background-color: transparent;
+}

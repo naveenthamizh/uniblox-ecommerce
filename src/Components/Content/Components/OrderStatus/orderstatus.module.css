@@ -1,0 +1,53 @@
+.successContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #f9f9f9;
+  padding: var(--space-20);
+  margin: auto;
+}
+
+.successMessage {
+  background-color: #ffffff;
+  border-radius: var(--space-8);
+  padding: var(--space-40);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.successMessage h1 {
+  color: var(--success-base);
+  font-size: var(--space-36);
+  margin-bottom: var(--space-20);
+}
+
+.successMessage p {
+  font-size: var(--font-size-16);
+  color: #555;
+  margin-bottom: var(--space-20);
+}
+
+.orderId {
+  font-weight: var(--font-weight-600);
+  color: #333;
+}
+
+.backHomeBtn {
+  display: inline-block;
+  padding: var(--space-12) var(--space-20);
+  font-size: 16px;
+  color: #fff;
+  background-color: var(--info-tint-2);
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.backHomeBtn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,47 @@
+.button {
+  border-radius: 8px;
+  padding: 0 var(--space-16);
+  font-weight: var(--font-weight-500);
+  font-size: var(--font-size-14);
+  line-height: 20px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: var(--space-12);
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  width: fit-content;
+  outline: none;
+}
+
+.button-solid {
+  color: var(--white);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.08),
+    inset 0px -1px 0px rgba(0, 0, 0, 0.2);
+  background: var(--primary-base);
+}
+
+.button-lg {
+  height: 40px;
+}
+
+.button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.button-secondary {
+  background-color: var(--white);
+  border: 1px solid var(--primary-base);
+  color: var(--primary-base);
+}

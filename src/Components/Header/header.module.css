@@ -1,0 +1,24 @@
+.header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-20) 120px;
+  border-bottom: 1px solid var(--gray-3);
+}
+
+.header:first-child {
+  cursor: pointer;
+}
+
+.navList {
+  display: flex;
+  column-gap: var(--space-40);
+  align-items: center;
+}
+
+.navList > * {
+  cursor: pointer;
+}
